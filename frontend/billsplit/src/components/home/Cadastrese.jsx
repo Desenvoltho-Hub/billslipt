@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
+import ModalCadastro from "./ModalCadastro";
+
 function Cadastrese() {
   return (
     <div>
-      <div className="hero  min-h-screen">
+      <div >
         <div className="hero-content text-center">
           <div className="max-w-md">
-            <h1 className="text-7xl font-bold text-accent p-5 ">
+            <h1 className="text-7xl font-bold text-accent p-5 bg-base-300 ">
               DIVIDA CONTAS SEM DOR DE CABEÇA!
             </h1>
             <h2 className="text-xl ">
@@ -12,7 +15,7 @@ function Cadastrese() {
               amigos em segundos...
             </h2>
             <p className="py-6">Experimente...</p>
-            <button className="btn btn-primary">Começar</button>
+            <ModalCadastro />
           </div>
         </div>
       </div>

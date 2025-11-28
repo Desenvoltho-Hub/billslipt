@@ -1,0 +1,45 @@
+function ModalCadastro() {
+  return (
+    <div>
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      <button
+        className="btn btn-primary"
+        onClick={() => document.getElementById("my_modal_1").showModal()}
+      >
+        Começar
+      </button>
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Cadastre-se!</h3>
+          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4 ">
+            <label className="label">Nome</label>
+            <input
+              type="text"
+              className="input w-full"
+              placeholder="Nome"
+            />
+
+            <label className="label">Email</label>
+            <input
+              type="text"
+              className="input w-full"
+              placeholder="exemplo@email.com"
+            />
+
+            <label className="label">Password</label>
+            <input type="text" className="input w-full" placeholder="Password" />
+          </fieldset>
+          <button className="btn btn-primary w-full">Cadastrar</button>
+
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn">Fechar</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+    </div>
+  );
+}
+
+export default ModalCadastro;

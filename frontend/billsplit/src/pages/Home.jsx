@@ -4,7 +4,7 @@ import CardAbout from "../components/home/CardAbout";
 function Home() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 ">
-      <div className="p-5">
+      <div className="p-10">
         <CardAbout />
       </div>
       <div className="col-span-2">
