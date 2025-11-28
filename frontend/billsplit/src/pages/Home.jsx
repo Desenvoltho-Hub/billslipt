@@ -3,12 +3,15 @@ import CardAbout from "../components/home/CardAbout";
 
 function Home() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3">
+    <div className="grid grid-cols-1 md:grid-cols-3 ">
       <div className="p-5">
         <CardAbout />
       </div>
       <div className="col-span-2">
-        <img src="../public/logop" alt="" />
+        <Cadastrese />
+      </div>
+      <div className="p-5">
+        <img src="explicacao.png" alt="" />
       </div>
       
     </div>
