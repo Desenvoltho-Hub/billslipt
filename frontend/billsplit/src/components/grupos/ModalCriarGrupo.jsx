@@ -1,4 +1,4 @@
-function ModalCriarGrupo({nameChange, nameValue, descriptionChange, descriptionValue}) {
+function ModalCriarGrupo({nameChange, nameValue, descriptionChange, descriptionValue, criar}) {
   return (
   <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -34,7 +34,7 @@ function ModalCriarGrupo({nameChange, nameValue, descriptionChange, descriptionV
 
           
           </fieldset>
-          <button className="btn btn-primary w-full" >
+          <button className="btn btn-primary w-full" onClick={criar} >
             Criar
           </button>
          

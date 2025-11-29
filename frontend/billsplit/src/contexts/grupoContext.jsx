@@ -12,6 +12,13 @@ export const GrupoProvider = ({ children }) => {
           [action.name]: action.value,
         };
       }
+      case "LIMPAR_INPUT": {
+        return {
+            ...state,
+            name: action.name,
+            description: action.description
+        }
+      }
     }
   };
   const [state, dispatch] = useReducer(reducer, {
@@ -34,10 +41,18 @@ export const GrupoProvider = ({ children }) => {
           name: state.name,
           description: state.description,
         });
+        alert('Grupo criado com sucesso!')
       } catch (err) {
         console.log(err.message);
+        alert('Erro ao criar grupo')
+      } finally {
+        dispatch({
+            type: "LIMPAR_INPUT",
+            name: '',
+            description: ''
+        })
       }
-    };
+    }   
   return (
     <GrupoContext.Provider value={{ grupoRegister, handleChange, state }}>
       {children}
