@@ -1,4 +1,14 @@
-function ModalLogin() {
+function ModalLogin({
+  nameChange,
+  emailChange,
+  passwordChange,
+  cadastrar,
+  nameValue,
+  emailValue,
+  passwordValue,
+  statusSuccess,
+  statusFail
+}) {
   return (
     <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -10,16 +20,40 @@ function ModalLogin() {
       </button>
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Login!</h3>
-          <p className="py-4">
-            Press ESC key or click the button below to close
-          </p>
+          <h3 className="font-bold text-lg">Cadastre-se!</h3>
+          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4 ">
+            <label className="label">Email</label>
+            <input
+              type="text"
+              className="input w-full"
+              placeholder="Nome"
+              onChange={nameChange}
+              name="name"
+              value={nameValue}
+            />
+
+         
+
+            <label className="label">Password</label>
+            <input
+              type="password"
+              className="input w-full"
+              placeholder="Password"
+              onChange={passwordChange}
+              name="password"
+              value={passwordValue}
+            />
+          </fieldset>
+          <button className="btn btn-primary w-full" onClick={cadastrar}>
+            Login
+          </button>
+        
           <div className="modal-action">
             <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
               <button className="btn">Fechar</button>
             </form>
           </div>
+        
         </div>
       </dialog>
     </div>
