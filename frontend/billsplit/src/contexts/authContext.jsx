@@ -25,8 +25,8 @@ export const AuthProvider = ({ children }) => {
         return {
           ...state,
           fail: action.fail,
-          success: action.success
-        }
+          success: action.success,
+        };
       }
       case "LIMPAR_INPUT": {
         return {
@@ -40,8 +40,8 @@ export const AuthProvider = ({ children }) => {
         return {
           ...state,
           failLogin: action.failLogin,
-          errorMessage: action.errorMessage
-        }
+          errorMessage: action.errorMessage,
+        };
       }
     }
   };
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
     success: false,
     fail: false,
     failLogin: false,
-    errorMessage: ''
+    errorMessage: "",
   });
   const handleChange = (e) => {
     dispatch({
@@ -86,9 +86,9 @@ export const AuthProvider = ({ children }) => {
       dispatch({
         type: "ALERT_FAIL",
         fail: true,
-        success: false
-      })
-      console.log(err.response)
+        success: false,
+      });
+      console.log(err.response);
     } finally {
       dispatch({
         type: "LIMPAR_INPUT",
@@ -101,36 +101,37 @@ export const AuthProvider = ({ children }) => {
   //====================================================================
   // !<userLogin>
   //====================================================================
-const userLogin = async () => {
-  try {
-    const response = await api.post("/user/login", {
-      email: state.email,
-      password: state.password
-    })
-    alert('LOGADO COM SUCESSO')
-    dispatch({
-      type: "FAIL_LOGIN",
-      failLogin: false,
-      errorMessage: null
-    })
-
-  } catch(err) {
-    dispatch({
-      type: "FAIL_LOGIN",
-      failLogin: true,
-      errorMessage: err
-    })
-  } finally {
-    dispatch({
+  const userLogin = async () => {
+    try {
+      const response = await api.post("/user/login", {
+        email: state.email,
+        password: state.password,
+      });
+      alert("LOGADO COM SUCESSO");
+      dispatch({
+        type: "FAIL_LOGIN",
+        failLogin: false,
+        errorMessage: null,
+      });
+    } catch (err) {
+      dispatch({
+        type: "FAIL_LOGIN",
+        failLogin: true,
+        errorMessage: err,
+      });
+    } finally {
+      dispatch({
         type: "LIMPAR_INPUT",
         name: "",
         email: "",
         password: "",
       });
-  }
-}
+    }
+  };
   return (
-    <AuthContext.Provider value={{ handleChange, userRegister, userLogin, state }}>
+    <AuthContext.Provider
+      value={{ handleChange, userRegister, userLogin, state }}
+    >
       {children}
     </AuthContext.Provider>
   );

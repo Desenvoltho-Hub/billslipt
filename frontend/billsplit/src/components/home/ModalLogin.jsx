@@ -1,12 +1,10 @@
 function ModalLogin({
- 
   emailChange,
   passwordChange,
   emailValue,
   login,
   passwordValue,
   statusFailLogin,
-
 }) {
   return (
     <div>
@@ -31,8 +29,6 @@ function ModalLogin({
               value={emailValue}
             />
 
-         
-
             <label className="label">Password</label>
             <input
               type="password"
@@ -48,19 +44,15 @@ function ModalLogin({
           </button>
           {statusFailLogin && (
             <div>
-              <h1>
-                Credenciais inválidas
-             
-              </h1>
+              <h1>Credenciais inválidas</h1>
             </div>
           )}
-        
+
           <div className="modal-action">
             <form method="dialog">
               <button className="btn">Fechar</button>
             </form>
           </div>
-        
         </div>
       </dialog>
     </div>
