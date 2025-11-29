@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import Dashboard from "./pages/Dashboard";
 import SideBar from "./components/SideBar";
 import Grupos from "./pages/Grupos";
+import Despesas from "./pages/Despesas";
 
 function App() {
   return (
@@ -41,6 +42,24 @@ function App() {
                 <div className="col-span-2">
 
                 <Grupos />
+                
+                </div>
+              </div>
+            </>
+          }
+        />
+        <Route
+          path="/despesas"
+          element={
+            <>
+              <NavBar />
+              <div className="grid grid-cols-2 md:grid-cols-3">
+                <div>
+                  <SideBar />
+                </div>
+                <div className="col-span-2">
+
+                <Despesas />
                 
                 </div>
               </div>
