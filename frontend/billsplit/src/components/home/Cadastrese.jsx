@@ -9,7 +9,8 @@ function Cadastrese({
   nameValue,
   emailValue,
   passwordValue,
-  statusFail
+  statusFail,
+  statusSuccess
 }) {
   return (
     <div>
@@ -33,6 +34,8 @@ function Cadastrese({
               emailValue={emailValue}
               passwordValue={passwordValue}
               statusFail={statusFail}
+              statusSuccess={statusSuccess}
+
             />
           </div>
         </div>

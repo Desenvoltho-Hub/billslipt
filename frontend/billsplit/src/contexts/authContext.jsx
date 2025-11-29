@@ -14,14 +14,36 @@ export const AuthProvider = ({ children }) => {
           [action.name]: action.value,
         };
       }
+      case "ALERT_SUCCESS": {
+        return {
+          ...state,
+          success: action.success,
+          fail: action.fail,
+        };
+      }
+      case "ALERT_FAIL": {
+        return {
+          ...state,
+          fail: action.fail,
+          success: action.success
+        }
+      }
+      case "LIMPAR_INPUT": {
+        return {
+          ...state,
+          name: action.name,
+          email: action.email,
+          password: action.password,
+        };
+      }
     }
   };
   const [state, dispatch] = useReducer(reducer, {
-    name: null,
-    email: null,
-    password: null,
+    name: "",
+    email: "",
+    password: "",
     success: false,
-    fail: false
+    fail: false,
   });
   const handleChange = (e) => {
     dispatch({
@@ -35,22 +57,38 @@ export const AuthProvider = ({ children }) => {
   //====================================================================
   const userRegister = async () => {
     try {
-     const response = await api.post(
-  "/user/register",
-  {
-    name: state.name,
-    email: state.email,
-    password: state.password,
-  },
-  { headers: { "Content-Type": "application/json" } }
-);
-      alert('Cadastro realizado com sucesso, parabéns jovem!')
-    } catch (err) {
-      console.log(err.response ? err.response.data : err)
+      const response = await api.post(
+        "/user/register",
+        {
+          name: state.name,
+          email: state.email,
+          password: state.password,
+        },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      if (response.status === 201) {
+        dispatch({
+          type: "ALERT_SUCCESS",
+          success: true,
+          fail: false,
+        });
       }
-    } 
-    
-  
+    } catch (err) {
+      dispatch({
+        type: "ALERT_FAIL",
+        fail: true,
+        success: false
+      })
+      console.log(err.response)
+    } finally {
+      dispatch({
+        type: "LIMPAR_INPUT",
+        name: "",
+        email: "",
+        password: "",
+      });
+    }
+  };
 
   return (
     <AuthContext.Provider value={{ handleChange, userRegister, state }}>

@@ -20,6 +20,7 @@ function Home() {
         emailValue={state.email}
         passwordValue={state.password}
         statusFail={state.fail}
+        statusSuccess={state.success}
         />
       </div>
       <div className=" md:col-span-3">

@@ -58,7 +58,14 @@ function ModalCadastro({
           {statusFail && (
             <div>
               <h1 className="badge-accent">
-                Não foi possível realizar o cadastro!
+                Não foi possível realizar o cadastro! Tente novamente...
+              </h1>
+            </div>
+          )}
+          {statusSuccess && (
+             <div>
+              <h1 className="badge-accent">
+                Cadastro realizado com sucesso!
               </h1>
             </div>
           )}
