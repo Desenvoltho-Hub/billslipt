@@ -13,7 +13,10 @@ function Cadastrese({
   emailValue,
   passwordValue,
   statusFail,
-  statusSuccess
+  login,
+  statusSuccess,
+  statusFailLogin,
+
 }) {
   return (
     <div>
@@ -40,7 +43,15 @@ function Cadastrese({
               statusFail={statusFail}
               statusSuccess={statusSuccess}
             />
-            <ModalLogin />
+            <ModalLogin 
+            emailChange={emailChange}
+            passwordChange={passwordChange}
+            login={login}
+            emailValue={emailValue}
+            passwordValue={passwordValue}
+            statusFailLogin={statusFailLogin}
+           
+            />
             </div>
             
           </div>

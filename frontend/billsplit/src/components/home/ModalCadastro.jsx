@@ -21,7 +21,7 @@ function ModalCadastro({
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Cadastre-se!</h3>
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4 ">
+          <fieldset className="fieldset bg-base-200 border-base-300  w-full border p-4 ">
             <label className="label">Nome</label>
             <input
               type="text"
@@ -52,7 +52,7 @@ function ModalCadastro({
               value={passwordValue}
             />
           </fieldset>
-          <button className="btn btn-primary w-full" onClick={cadastrar}>
+          <button className="btn btn-secondary w-full" onClick={cadastrar}>
             Cadastrar
           </button>
           {statusFail && (

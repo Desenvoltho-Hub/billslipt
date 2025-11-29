@@ -4,7 +4,7 @@ import CardAbout from "../components/home/CardAbout";
 import { AuthContext } from "../contexts/authContext";
 
 function Home() {
-  const { state, handleChange, userRegister } = useContext(AuthContext);
+  const { state, handleChange, userRegister, userLogin } = useContext(AuthContext);
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 ">
       <div className="p-10">
@@ -16,11 +16,14 @@ function Home() {
           emailChange={handleChange}
           passwordChange={handleChange}
           cadastrar={() => userRegister()}
+          login={() => userLogin()}
           nameValue={state.name}
           emailValue={state.email}
           passwordValue={state.password}
           statusFail={state.fail}
           statusSuccess={state.success}
+          statusFailLogin={state.failLogin}
+        
         />
       </div>
       <div className=" md:col-span-3">

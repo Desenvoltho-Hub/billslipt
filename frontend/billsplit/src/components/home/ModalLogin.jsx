@@ -1,13 +1,12 @@
 function ModalLogin({
-  nameChange,
+ 
   emailChange,
   passwordChange,
-  cadastrar,
-  nameValue,
   emailValue,
+  login,
   passwordValue,
-  statusSuccess,
-  statusFail
+  statusFailLogin,
+
 }) {
   return (
     <div>
@@ -20,16 +19,16 @@ function ModalLogin({
       </button>
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Cadastre-se!</h3>
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4 ">
+          <h3 className="font-bold text-lg">Login!</h3>
+          <fieldset className="fieldset bg-base-200 border-base-300  w-full border p-4 ">
             <label className="label">Email</label>
             <input
               type="text"
               className="input w-full"
-              placeholder="Nome"
-              onChange={nameChange}
-              name="name"
-              value={nameValue}
+              placeholder="exemplo@exemplo.com"
+              onChange={emailChange}
+              name="email"
+              value={emailValue}
             />
 
          
@@ -44,9 +43,17 @@ function ModalLogin({
               value={passwordValue}
             />
           </fieldset>
-          <button className="btn btn-primary w-full" onClick={cadastrar}>
+          <button className="btn btn-primary w-full" onClick={login}>
             Login
           </button>
+          {statusFailLogin && (
+            <div>
+              <h1>
+                Credenciais inválidas
+             
+              </h1>
+            </div>
+          )}
         
           <div className="modal-action">
             <form method="dialog">
