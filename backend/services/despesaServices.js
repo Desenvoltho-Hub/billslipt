@@ -7,7 +7,7 @@ import Grupo from "../models/Grupo.js";
 //====================================================================
 export const despesaCreate = async ({ id, titulo, total }) => {
   try {
-    const grupoExist = await Grupo.findById( id );
+    const grupoExist = await Grupo.findById(id);
     if (!grupoExist) {
       throw new Error("O grupo não existe!");
     }
@@ -21,7 +21,26 @@ export const despesaCreate = async ({ id, titulo, total }) => {
       total,
       grupoId: id,
     });
-    return response
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};
+//====================================================================
+// !<despesaPopulate>
+//====================================================================
+export const despesaPopulate = async ({ id }) => {
+    console.log(id)
+  try {
+    const despesaExist = await Despesa.findById(id)
+      .populate("pagoPor")
+      .populate("participantes")
+      .populate("grupoId")
+    if (!despesaExist) {
+      throw new Error("Despesa não existente ou inválida");
+    }
+
+    return despesaExist;
   } catch (err) {
     throw err;
   }

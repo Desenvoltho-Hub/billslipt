@@ -1,4 +1,4 @@
-import { despesaCreate } from "../services/despesaServices.js"
+import { despesaCreate, despesaPopulate } from "../services/despesaServices.js"
 
 
 //====================================================================
@@ -12,5 +12,18 @@ export const despesaSend = async (req, res) => {
         res.status(201).json({message: 'Despesa criada com sucesso!', response})
     } catch(err) {
         res.status(400).json({message: err.message})
+    }
+}
+//====================================================================
+// !<despesaGet>
+//====================================================================
+export const despesaGet = async (req, res) => {
+    const id = req.params.id
+    console.log(id)
+    try {
+        const response = await despesaPopulate({id})
+        return res.status(200).json({message: "Despesa populada com sucesso", response})
+    } catch(err){
+        return res.status(400).json({message: err.message})
     }
 }

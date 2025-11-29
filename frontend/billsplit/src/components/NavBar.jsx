@@ -1,7 +1,7 @@
 function NavBar() {
   return (
     <div className="flex bg-base-300">
-      <div className="w-32 m-7">
+      <div className="w-20 m-7 hover-3d">
         <img src="../public/logobillsplit.png" alt="" />
       </div>
       <div className="navbar bg-base-100 shadow-sm">
