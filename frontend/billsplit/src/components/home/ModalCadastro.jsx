@@ -1,4 +1,14 @@
-function ModalCadastro() {
+function ModalCadastro({
+  nameChange,
+  emailChange,
+  passwordChange,
+  cadastrar,
+  nameValue,
+  emailValue,
+  passwordValue,
+  statusSuccess,
+  statusFail
+}) {
   return (
     <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -17,6 +27,9 @@ function ModalCadastro() {
               type="text"
               className="input w-full"
               placeholder="Nome"
+              onChange={nameChange}
+              name="name"
+              value={nameValue}
             />
 
             <label className="label">Email</label>
@@ -24,12 +37,31 @@ function ModalCadastro() {
               type="text"
               className="input w-full"
               placeholder="exemplo@email.com"
+              onChange={emailChange}
+              name="email"
+              value={emailValue}
             />
 
             <label className="label">Password</label>
-            <input type="text" className="input w-full" placeholder="Password" />
+            <input
+              type="text"
+              className="input w-full"
+              placeholder="Password"
+              onChange={passwordChange}
+              name="password"
+              value={passwordValue}
+            />
           </fieldset>
-          <button className="btn btn-primary w-full">Cadastrar</button>
+          <button className="btn btn-primary w-full" onClick={cadastrar}>
+            Cadastrar
+          </button>
+          {statusFail && (
+            <div>
+              <h1 className="badge-accent">
+                Não foi possível realizar o cadastro!
+              </h1>
+            </div>
+          )}
 
           <div className="modal-action">
             <form method="dialog">

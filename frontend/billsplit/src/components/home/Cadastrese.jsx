@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
 import ModalCadastro from "./ModalCadastro";
 
-function Cadastrese() {
+function Cadastrese({
+  nameChange,
+  emailChange,
+  passwordChange,
+  cadastrar,
+  nameValue,
+  emailValue,
+  passwordValue,
+  statusFail
+}) {
   return (
     <div>
-      <div >
+      <div>
         <div className="hero-content text-center">
           <div className="max-w-md">
             <h1 className="text-7xl font-bold text-accent p-5 bg-base-300 ">
@@ -15,7 +24,16 @@ function Cadastrese() {
               amigos em segundos...
             </h2>
             <p className="py-6">Experimente...</p>
-            <ModalCadastro />
+            <ModalCadastro
+              nameChange={nameChange}
+              emailChange={emailChange}
+              passwordChange={passwordChange}
+              cadastrar={cadastrar}
+              nameValue={nameValue}
+              emailValue={emailValue}
+              passwordValue={passwordValue}
+              statusFail={statusFail}
+            />
           </div>
         </div>
       </div>
