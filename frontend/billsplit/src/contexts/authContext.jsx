@@ -35,29 +35,22 @@ export const AuthProvider = ({ children }) => {
   //====================================================================
   const userRegister = async () => {
     try {
-      const response = await api.post("/user/register", {
-        name: state.name,
-        email: state.email,
-        password: state.password,
-      });
-      if(response) {
-        state.success = true
-      }
-      console.log(state.name)
-      
+     const response = await api.post(
+  "/user/register",
+  {
+    name: state.name,
+    email: state.email,
+    password: state.password,
+  },
+  { headers: { "Content-Type": "application/json" } }
+);
+      alert('Cadastro realizado com sucesso, parabéns jovem!')
     } catch (err) {
-      alert('Erro ao cadastrar usuário')
-      if(err) {
-        state.fail = true
+      console.log(err.response ? err.response.data : err)
       }
-      console.log(state.fail)
-      console.log(err);
-    } finally {
-      state.name = '',
-      state.email = '',
-      state.password = ''
-    }
-  };
+    } 
+    
+  
 
   return (
     <AuthContext.Provider value={{ handleChange, userRegister, state }}>

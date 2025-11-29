@@ -44,7 +44,7 @@ function ModalCadastro({
 
             <label className="label">Password</label>
             <input
-              type="text"
+              type="password"
               className="input w-full"
               placeholder="Password"
               onChange={passwordChange}
