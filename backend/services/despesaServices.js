@@ -30,17 +30,38 @@ export const despesaCreate = async ({ id, titulo, total }) => {
 // !<despesaPopulate>
 //====================================================================
 export const despesaPopulate = async ({ id }) => {
-    
   try {
     const despesaExist = await Despesa.findById(id)
       .populate("pagoPor")
       .populate("participantes.memberId")
-      .populate("grupoId")
+      .populate("grupoId");
     if (!despesaExist) {
       throw new Error("Despesa não existente ou inválida");
     }
 
     return despesaExist;
+  } catch (err) {
+    throw err;
+  }
+};
+//====================================================================
+// !<despesaInvite>
+//====================================================================
+export const despesaInvite = async ({ id, membros }) => {
+  try {
+    const despesaExist = await Despesa.findById(id);
+    if (!despesaExist) {
+      throw new Error("Despesa não encontrada");
+    }
+    if(!Array.isArray(membros)) {
+        membros = [membros]
+    }
+    const response = await Despesa.findByIdAndUpdate(
+      id,
+      { $push: { participantes: { $each: membros } } },
+      { new: true }
+    );
+    return response;
   } catch (err) {
     throw err;
   }

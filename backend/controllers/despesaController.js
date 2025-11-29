@@ -1,4 +1,4 @@
-import { despesaCreate, despesaPopulate } from "../services/despesaServices.js"
+import { despesaCreate, despesaInvite, despesaPopulate } from "../services/despesaServices.js"
 
 
 //====================================================================
@@ -25,5 +25,18 @@ export const despesaGet = async (req, res) => {
         return res.status(200).json({message: "Despesa populada com sucesso", response})
     } catch(err){
         return res.status(400).json({message: err.message})
+    }
+}
+//====================================================================
+// !<despesaPut>
+//====================================================================
+export const despesaPut = async (req, res) => {
+    const id = req.params.id
+    const membros = req.body
+    try {
+        const response = await despesaInvite({id, membros})
+        res.status(200).json({message: 'Novos participantes adicionados com sucesso!', response})
+    } catch(err) {
+        res.status(400).json({message: err.message})
     }
 }
