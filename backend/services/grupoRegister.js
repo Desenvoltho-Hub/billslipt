@@ -1,9 +1,7 @@
-//====================================================================
-// !<grupoCreate>
-
 import mongoose from "mongoose"
 import Grupo from "../models/Grupo.js"
-
+//====================================================================
+// !<grupoCreate>
 //====================================================================
 export const grupoCreate = async ({name, description, creator}) => {
     try {
