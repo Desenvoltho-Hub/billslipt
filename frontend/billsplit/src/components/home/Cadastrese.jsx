@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import ModalCadastro from "./ModalCadastro";
+import ModalLogin from "./ModalLogin";
+
+
 
 function Cadastrese({
   nameChange,
@@ -25,7 +28,8 @@ function Cadastrese({
               amigos em segundos...
             </h2>
             <p className="py-6">Experimente...</p>
-            <ModalCadastro
+            <div className="flex justify-center gap-5">
+                <ModalCadastro
               nameChange={nameChange}
               emailChange={emailChange}
               passwordChange={passwordChange}
@@ -35,8 +39,10 @@ function Cadastrese({
               passwordValue={passwordValue}
               statusFail={statusFail}
               statusSuccess={statusSuccess}
-
             />
+            <ModalLogin />
+            </div>
+            
           </div>
         </div>
       </div>

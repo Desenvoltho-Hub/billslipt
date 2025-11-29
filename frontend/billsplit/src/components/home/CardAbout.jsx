@@ -1,6 +1,7 @@
 function CardAbout() {
   return (
     <div>
+      
       <div>
         <img src="../public/logobillsplit.png" alt="" />
       </div>
