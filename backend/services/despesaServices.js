@@ -30,11 +30,11 @@ export const despesaCreate = async ({ id, titulo, total }) => {
 // !<despesaPopulate>
 //====================================================================
 export const despesaPopulate = async ({ id }) => {
-    console.log(id)
+    
   try {
     const despesaExist = await Despesa.findById(id)
       .populate("pagoPor")
-      .populate("participantes")
+      .populate("participantes.memberId")
       .populate("grupoId")
     if (!despesaExist) {
       throw new Error("Despesa não existente ou inválida");

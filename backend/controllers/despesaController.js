@@ -19,7 +19,7 @@ export const despesaSend = async (req, res) => {
 //====================================================================
 export const despesaGet = async (req, res) => {
     const id = req.params.id
-    console.log(id)
+    
     try {
         const response = await despesaPopulate({id})
         return res.status(200).json({message: "Despesa populada com sucesso", response})
