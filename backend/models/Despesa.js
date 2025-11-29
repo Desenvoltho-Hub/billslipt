@@ -33,4 +33,4 @@ export const DespesaSchema = new mongoose.Schema({
 
 
 }, {timestamps: true})
-export default mongoose.Schema('Despesa', DespesaSchema)
+export default mongoose.model('Despesa', DespesaSchema)
