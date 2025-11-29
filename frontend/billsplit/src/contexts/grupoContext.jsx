@@ -19,11 +19,18 @@ export const GrupoProvider = ({ children }) => {
             description: action.description
         }
       }
+      case "FAIL": {
+        return {
+            ...state,
+            fail: action.fail
+        }
+      }
     }
   };
   const [state, dispatch] = useReducer(reducer, {
     name: "",
     description: "",
+    fail: false,
   });
   const handleChange = (e) => {
     dispatch({
@@ -41,10 +48,16 @@ export const GrupoProvider = ({ children }) => {
           name: state.name,
           description: state.description,
         });
-        alert('Grupo criado com sucesso!')
+        dispatch({
+            type: "FAIL",
+            fail: false
+        })
       } catch (err) {
         console.log(err.message);
-        alert('Erro ao criar grupo')
+        dispatch({
+            type: "FAIL",
+            fail: true
+        })
       } finally {
         dispatch({
             type: "LIMPAR_INPUT",

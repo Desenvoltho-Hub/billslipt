@@ -1,4 +1,4 @@
-function ModalCriarGrupo({nameChange, nameValue, descriptionChange, descriptionValue, criar}) {
+function ModalCriarGrupo({nameChange, nameValue, descriptionChange, descriptionValue, criar, fail}) {
   return (
   <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -32,12 +32,18 @@ function ModalCriarGrupo({nameChange, nameValue, descriptionChange, descriptionV
               value={descriptionValue}
             />
 
-          
+         
           </fieldset>
           <button className="btn btn-primary w-full" onClick={criar} >
             Criar
           </button>
-         
+          {fail && (
+            <div>
+                <h1>
+                    Não foi possível criar o grupo. Tente novamente...
+                </h1>
+            </div>
+          ) }
         
           <div className="modal-action">
             <form method="dialog">

@@ -15,6 +15,7 @@ function Grupos() {
         descriptionChange={handleChange}
         descriptionValue={state.description}
         criar={() => grupoRegister()}
+        fail={state.fail}
         />
       </div>
       <TableGrupos />
