@@ -25,12 +25,26 @@ export const GrupoProvider = ({ children }) => {
             fail: action.fail
         }
       }
+      case "GRUPOS": {
+        return {
+            ...state,
+            grupos: action.grupos
+        }
+      }
+      case "IS_LOADING": {
+        return {
+            ...state,
+            loading: action.loading
+        }
+      }
     }
   };
   const [state, dispatch] = useReducer(reducer, {
     name: "",
     description: "",
     fail: false,
+    grupos: [],
+    loading: false
   });
   const handleChange = (e) => {
     dispatch({
@@ -65,9 +79,32 @@ export const GrupoProvider = ({ children }) => {
             description: ''
         })
       }
-    }   
+    }
+    //====================================================================
+    // !<grupoFind>
+    //====================================================================
+    const grupoFind = async () => {
+        try {
+             dispatch({
+                type: "IS_LOADING",
+                loading: true
+            })
+            const grupos = await api.get("/grupo/grupos")
+            dispatch({
+                type: "GRUPOS",
+                grupos: grupos.data.response
+            })
+        } catch(err) {
+            console.log(err)
+        } finally{
+              dispatch({
+                type: "IS_LOADING",
+                loading: false
+            })
+        }
+    }
   return (
-    <GrupoContext.Provider value={{ grupoRegister, handleChange, state }}>
+    <GrupoContext.Provider value={{ grupoRegister, handleChange, state, grupoFind }}>
       {children}
     </GrupoContext.Provider>
   );
