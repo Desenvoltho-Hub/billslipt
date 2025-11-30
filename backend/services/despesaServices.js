@@ -83,3 +83,17 @@ export const despesaGroup = async (id) => {
     throw err;
   }
 };
+//====================================================================
+// !<despesaTotal>
+//====================================================================
+export const despesaTotal = async ({id}) => {
+  try {
+    if(!id) {
+      throw new Error('Não foi possível achar id')
+    }
+    const response = await Despesa.find({memberId: id})
+    return response
+  } catch (err) {
+    throw err
+  }
+}

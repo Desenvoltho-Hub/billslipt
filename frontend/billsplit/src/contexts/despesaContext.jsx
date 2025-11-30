@@ -121,8 +121,8 @@ export const DespesaProvider = ({ children }) => {
 const participantes = (id) => {
   const jaSelecionado = state.participantes.includes(id);
   const novosParticipantes = jaSelecionado
-    ? state.participantes.filter((pid) => pid !== id) // remove se já estava
-    : [...state.participantes, id]; // adiciona se não estava
+    ? state.participantes.filter((pid) => pid !== id) 
+    : [...state.participantes, id]; 
 
   dispatch({
     type: "PARTICIPANTES",
