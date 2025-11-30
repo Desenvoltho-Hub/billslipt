@@ -23,9 +23,6 @@ function SideBar() {
           Despesas
         </NavLink>
       </div>
-      <div className="p-5 text-3xl text-center">
-        <span className="text-gray-700">Config</span>
-      </div>
     </div>
   );
 }
