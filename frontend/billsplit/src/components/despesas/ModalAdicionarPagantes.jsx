@@ -15,9 +15,10 @@ function ModalAdicionarPagantes() {
           <h3 className="font-bold text-lg">Adiconar pagantes!</h3>
         <TableAdicionarPagantes/>
           <div className="modal-action">
+            <button className='btn btn-primary'>Adicionar</button>
             <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn">Close</button>
+             
+              <button className="btn">Fechar</button>
             </form>
           </div>
         </div>
