@@ -141,7 +141,7 @@ const participantes = (id) => {
         membros: state.participantes
       })
       alert('Participantes adicionados com sucesso!')
-    } catch {
+    } catch (err){
       console.log(err)
     }
   }
