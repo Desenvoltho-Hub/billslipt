@@ -3,6 +3,7 @@ import ModalCriarDespesa from "../components/despesas/ModalCriarDespesa";
 import { DespesaContext } from "../contexts/despesaContext";
 import { GrupoContext } from "../contexts/grupoContext";
 import SelectDespesa from "../components/despesas/SelectDespesa";
+import TableDespesas from "../components/despesas/TableDespesas";
 
 function Despesas() {
   const { state, handleChange, despesaCreate, despesaGrupo } = useContext(DespesaContext);
@@ -14,6 +15,7 @@ function Despesas() {
 
 useEffect(() => {
   if (state.grupoSelecionado) {
+    console.log("Chamando despesaGrupo com id:", state.grupoSelecionado); // groove check
     despesaGrupo(state.grupoSelecionado);
   }
 }, [state.grupoSelecionado]);
@@ -38,13 +40,9 @@ useEffect(() => {
           grupos={grupoState.grupos}
         />
       </div>
-      <div className="bg-base-300"></div>
-      <div className="p-5">
-        <h1 className="text-5xl">Grupo</h1>
-      </div>
-      <div className="p-5">
-        <h1 className="text-5xl">Participantes</h1>
-      </div>
+     <div>
+      <TableDespesas/>
+     </div>
     </div>
   );
 }

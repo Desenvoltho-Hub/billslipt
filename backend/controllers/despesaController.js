@@ -52,12 +52,24 @@ export const despesaPut = async (req, res) => {
 //====================================================================
 // !<despesaGrupo>
 //====================================================================
+
 export const despesaGrupo = async (req, res) => {
-    const id = req.params.id
-    try  {
-        const response = await despesaGroup(id)
-        res.status(200).json({message: 'Despesas do grupo encontradas com sucesso!', response})
-    } catch(err) {
-        res.status(400).json({message: err.message})
+  const id = req.params.id;
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "ID inválido" });
     }
-}
+
+    const response = await despesaGroup(id);
+
+
+    res.status(200).json({
+      message: "Despesas do grupo encontradas com sucesso!",
+      response,
+    });
+  } catch (err) {
+    console.log("Erro backend:", err);
+    res.status(400).json({ message: err.message });
+  }
+};

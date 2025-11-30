@@ -1,26 +1,28 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import { GrupoContext } from "../../contexts/grupoContext";
 
-function SelectDespesa({grupoChange}) {
-  const {state} = useContext(GrupoContext)
+function SelectDespesa({ grupoChange }) {
+  const { state } = useContext(GrupoContext);
 
-    return (
-    
+  return (
     <div>
       <select
-  className="select"
-  name="grupoSelecionado"
-  onChange={grupoChange}
-  defaultValue=""
->
-  <option value="" disabled>Escolher Grupo</option>
-
-  {state.grupos?.map((g) => (
-    <option key={g._id} value={g._id}>
-      {g.name}
-    </option>
-  ))}
-</select>
+        className="select select-bordered w-full max-w-xs" // DaisyUI
+        name="grupoSelecionado"
+        value={state.grupoSelecionado || ""} // controlado
+        onChange={(e) =>
+          grupoChange({ name: e.target.name, value: e.target.value })
+        }
+      >
+        <option value="" disabled>
+          Escolher Grupo
+        </option>
+        {state.grupos?.map((g) => (
+          <option key={g._id} value={g._id}>
+            {g.name}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }

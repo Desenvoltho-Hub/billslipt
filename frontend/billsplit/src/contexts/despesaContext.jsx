@@ -23,9 +23,13 @@ export const DespesaProvider = ({ children }) => {
     grupoSelecionado: ''
   });
 
-  const handleChange = (e) => {
-    dispatch({ type: "INPUT", name: e.target.name, value: e.target.value });
-  };
+ const handleChange = (eOrObj) => {
+  if (eOrObj.target) {
+    dispatch({ type: "INPUT", name: eOrObj.target.name, value: eOrObj.target.value });
+  } else {
+    dispatch({ type: "INPUT", name: eOrObj.name, value: eOrObj.value });
+  }
+};
 
   //====================================================================
   // !<despesaCreate>
