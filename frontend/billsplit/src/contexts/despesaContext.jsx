@@ -1,7 +1,6 @@
 import { createContext, useReducer } from "react";
 import { api } from "../api/api";
 
-
 export const DespesaContext = createContext();
 
 export const DespesaProvider = ({ children }) => {
@@ -12,7 +11,19 @@ export const DespesaProvider = ({ children }) => {
       case "DESPESAS":
         return { ...state, despesas: action.despesas };
       case "SET_GRUPO": {
-        return { ...state, grupo: action.grupo};
+        return { ...state, grupo: action.grupo };
+      }
+      case "DESPESA_SELECIONADA": {
+        return {
+          ...state,
+          despesaSelecionada: action.despesaSelecionada,
+        };
+      }
+      case "PARTICIPANTES": {
+        return {
+          ...state,
+          participantes: action.participantes
+        }
       }
       default:
         return state;
@@ -25,7 +36,9 @@ export const DespesaProvider = ({ children }) => {
     id: "",
     despesas: [],
     grupoSelecionado: "",
-    grupo: []
+    grupo: [],
+    despesaSelecionada: "",
+    participantes: []
   });
 
   const handleChange = (eOrObj) => {
@@ -81,21 +94,69 @@ export const DespesaProvider = ({ children }) => {
   //====================================================================
   // !<despesaGrupoSelecionado>
   //====================================================================
-const despesaGrupoSelecionado = async () => {
-  const id = state.grupoSelecionado
-  try {
-    const response = await api.get(`/grupo/grupo/${id}`)
+  const despesaGrupoSelecionado = async () => {
+    const id = state.grupoSelecionado;
+    try {
+      const response = await api.get(`/grupo/grupo/${id}`);
+      dispatch({
+        type: "SET_GRUPO",
+        grupo: response.data.response,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //====================================================================
+  // !<despesaSelecionada>
+  //====================================================================
+  const despesaSelecionada = (id) => {
     dispatch({
-      type: "SET_GRUPO",
-      grupo: response.data.response
-    })
-  } catch (err) {
-    console.log(err)
+      type: "DESPESA_SELECIONADA",
+      despesaSelecionada: id,
+    });
+  };
+  //====================================================================
+  // !<despesaParticipantes>
+  //====================================================================
+const participantes = (id) => {
+  const jaSelecionado = state.participantes.includes(id);
+  const novosParticipantes = jaSelecionado
+    ? state.participantes.filter((pid) => pid !== id) // remove se já estava
+    : [...state.participantes, id]; // adiciona se não estava
+
+  dispatch({
+    type: "PARTICIPANTES",
+    participantes: novosParticipantes,
+  });
+  
+};
+  //====================================================================
+  // !<despesaAddParticipantes>
+  //====================================================================
+  const despesaAddParticipantes = async () => {
+    const id = state.despesaSelecionada
+
+    try {
+      await api.put(`despesa/adicionar/${id}`, {
+        membros: state.participantes
+      })
+      alert('Participantes adicionados com sucesso!')
+    } catch {
+      console.log(err)
+    }
   }
-}
   return (
     <DespesaContext.Provider
-      value={{ state, handleChange, despesaGrupoSelecionado, despesaGrupo, despesaCreate }}
+      value={{
+        state,
+        handleChange,
+        despesaGrupoSelecionado,
+        despesaGrupo,
+        despesaCreate,
+        despesaSelecionada,
+        participantes,
+        despesaAddParticipantes
+      }}
     >
       {children}
     </DespesaContext.Provider>

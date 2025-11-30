@@ -22,7 +22,8 @@ export const DespesaSchema = new mongoose.Schema({
     memberId: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
+      unique: true
     },
     amount: {
       type: Number,

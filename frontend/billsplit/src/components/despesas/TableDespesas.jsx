@@ -3,7 +3,7 @@ import { DespesaContext } from "../../contexts/despesaContext";
 import {BanknoteArrowUp} from 'lucide-react'
 import ModalAdicionarPagantes from "./ModalAdicionarPagantes";
 function TableDespesas() {
-    const {state} = useContext(DespesaContext)
+    const {state, despesaSelecionada} = useContext(DespesaContext)
   return (
     <div>
       <div className="overflow-x-auto bg-base-300">
@@ -22,12 +22,16 @@ function TableDespesas() {
           </thead>
           <tbody>
          {state.despesas?.map((d) => (
-                   <tr>
+                   <tr key={d._id}>
               <th></th>
               <td>{d.titulo}</td>
               <td>{d.pagoPor}</td>
               <td>R$ {d.total}</td>
-                <td><ModalAdicionarPagantes/></td>
+                <td><ModalAdicionarPagantes
+                click={() => {document.getElementById("my_modal_5").showModal()
+                  despesaSelecionada(d._id)
+                }}
+                /></td>
                  <td><ModalAdicionarPagantes/></td>
             </tr>
 

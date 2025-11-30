@@ -57,10 +57,10 @@ export const despesaInvite = async ({ id, membros }) => {
       membros = [membros];
     }
     const response = await Despesa.findByIdAndUpdate(
-      id,
-      { $push: { participantes: { $each: membros } } },
-      { new: true }
-    );
+  id,
+  { $addToSet: { participantes: { $each: membros.map(m => ({ memberId: m, amount: 0 })) } } },
+  { new: true }
+);
     return response;
   } catch (err) {
     throw err;
