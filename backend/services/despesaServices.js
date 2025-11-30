@@ -48,23 +48,22 @@ export const despesaPopulate = async ({ id }) => {
 // !<despesaInvite>
 //====================================================================
 export const despesaInvite = async ({ id, membros }) => {
-  try {
-    const despesaExist = await Despesa.findById(id);
-    if (!despesaExist) {
-      throw new Error("Despesa não encontrada");
-    }
-    if (!Array.isArray(membros)) {
-      membros = [membros];
-    }
-    const response = await Despesa.findByIdAndUpdate(
-      id,
-      { $addToSet: { participantes: { $each: membros } } },
-      { new: true }
-    );
-    return response;
-  } catch (err) {
-    throw err;
-  }
+  if (!Array.isArray(membros)) membros = [membros];
+
+  const membrosAtualizados = membros
+    .filter(m => m.memberId && mongoose.Types.ObjectId.isValid(m.memberId))
+    .map(m => ({
+      memberId: mongoose.Types.ObjectId(m.memberId),
+      amount: m.amount ?? 0
+    }));
+
+  const response = await Despesa.findByIdAndUpdate(
+    id,
+    { $push: { participantes: { $each: membrosAtualizados } } },
+    { new: true, runValidators: true }
+  );
+
+  return response;
 };
 //====================================================================
 // !<despesaGroup>

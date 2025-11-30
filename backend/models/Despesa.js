@@ -23,11 +23,12 @@ export const DespesaSchema = new mongoose.Schema({
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
-      unique: true
+      
     },
     amount: {
       type: Number,
-      required: true
+      required: true,
+      default: 0
     }
   }
 ]

@@ -133,18 +133,30 @@ const participantes = (id) => {
   //====================================================================
   // !<despesaAddParticipantes>
   //====================================================================
-  const despesaAddParticipantes = async () => {
-    const id = state.despesaSelecionada
+ const despesaAddParticipantes = async () => {
+  const id = state.despesaSelecionada;
+  if (!id) return alert("Selecione uma despesa primeiro!");
+  if (!state.participantes.length) return alert("Selecione pelo menos um participante!");
+  if (!state.grupo.members?.length) return alert("Grupo não carregado ainda!");
 
-    try {
-      await api.put(`despesa/adicionar/${id}`, {
-        membros: state.participantes
-      })
-      alert('Participantes adicionados com sucesso!')
-    } catch (err){
-      console.log(err)
-    }
+  const membrosPayload = state.grupo.members
+    .filter((m) => state.participantes.includes(m._id))
+    .map((m) => ({
+      memberId: m._id,
+      name: m.name,
+      amount: 0
+    }));
+
+  console.log("Payload:", membrosPayload);
+
+  try {
+    const response = await api.put(`/despesa/adicionar/${id}`, { membros: membrosPayload });
+    console.log("Resposta backend:", response.data);
+    alert("Participantes adicionados com sucesso!");
+  } catch (err) {
+    console.log(err);
   }
+};
   return (
     <DespesaContext.Provider
       value={{
