@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 function NavBar() {
   return (
     <div className="flex bg-base-300">
       <div className="w-20 m-7 hover-3d">
-        <img src="../public/logobillsplit.png" alt="" />
+        <Link to='/dashboard'><img src="../public/logobillsplit.png" alt="" /></Link>
       </div>
       <div className="navbar bg-base-100 shadow-sm">
         <div className="navbar-start">
