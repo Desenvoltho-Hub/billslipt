@@ -37,6 +37,8 @@ export const GrupoProvider = ({ children }) => {
             loading: action.loading
         }
       }
+      default:
+        return state
     }
   };
   const [state, dispatch] = useReducer(reducer, {

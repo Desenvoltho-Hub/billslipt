@@ -14,7 +14,7 @@ function ModalCriarDespesa({
         className="btn btn-primary"
         onClick={() => document.getElementById("my_modal_4").showModal()}
       >
-        Nova despesa
+        + Nova despesa
       </button>
 
       <dialog id="my_modal_4" className="modal">

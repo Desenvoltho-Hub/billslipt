@@ -1,4 +1,6 @@
-import { despesaCreate, despesaInvite, despesaPopulate } from "../services/despesaServices.js"
+import Despesa from "../models/Despesa.js";
+import { despesaCreate, despesaGroup, despesaInvite, despesaPopulate } from "../services/despesaServices.js"
+import mongoose from "mongoose";
 
 
 //====================================================================
@@ -19,11 +21,17 @@ export const despesaSend = async (req, res) => {
 //====================================================================
 export const despesaGet = async (req, res) => {
     const id = req.params.id
-    
+    console.log("ID RECEBIDO:", req.params.id);
+console.log("TIPO:", typeof req.params.id);
+
+if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+  console.log("ID INVÁLIDO!");
+}
     try {
         const response = await despesaPopulate({id})
         return res.status(200).json({message: "Despesa populada com sucesso", response})
     } catch(err){
+        console.log(err)
         return res.status(400).json({message: err.message})
     }
 }
@@ -36,6 +44,19 @@ export const despesaPut = async (req, res) => {
     try {
         const response = await despesaInvite({id, membros})
         res.status(200).json({message: 'Novos participantes adicionados com sucesso!', response})
+    } catch(err) {
+        res.status(400).json({message: err.message})
+    }
+}
+
+//====================================================================
+// !<despesaGrupo>
+//====================================================================
+export const despesaGrupo = async (req, res) => {
+    const id = req.params.id
+    try  {
+        const response = await despesaGroup(id)
+        res.status(200).json({message: 'Despesas do grupo encontradas com sucesso!', response})
     } catch(err) {
         res.status(400).json({message: err.message})
     }

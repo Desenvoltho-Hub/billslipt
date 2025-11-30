@@ -66,3 +66,21 @@ export const despesaInvite = async ({ id, membros }) => {
     throw err;
   }
 };
+//====================================================================
+// !<despesaGroup>
+//====================================================================
+export const despesaGroup = async (id) => {
+  try {
+    const grupo = await Grupo.findById(id)
+    if(!grupo) {
+      throw new Error('Grupo não encontrado!')
+    }
+    const despesaPorGrupo = await Despesa.find({grupoId: id}, 
+    ).populate("pagoPor")
+    .populate("participantes.memberId")
+    .populate("grupoId")
+    return despesaPorGrupo
+  } catch(err) {
+    throw err
+  }
+}
