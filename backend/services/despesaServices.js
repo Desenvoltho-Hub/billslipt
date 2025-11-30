@@ -53,8 +53,8 @@ export const despesaInvite = async ({ id, membros }) => {
     if (!despesaExist) {
       throw new Error("Despesa não encontrada");
     }
-    if(!Array.isArray(membros)) {
-        membros = [membros]
+    if (!Array.isArray(membros)) {
+      membros = [membros];
     }
     const response = await Despesa.findByIdAndUpdate(
       id,
@@ -71,16 +71,16 @@ export const despesaInvite = async ({ id, membros }) => {
 //====================================================================
 export const despesaGroup = async (id) => {
   try {
-    const grupo = await Grupo.findById(id)
-    if(!grupo) {
-      throw new Error('Grupo não encontrado!')
+    const grupo = await Grupo.findById(id);
+    if (!grupo) {
+      throw new Error("Grupo não encontrado!");
     }
-    const despesaPorGrupo = await Despesa.find({grupoId: id}, 
-    ).populate("pagoPor")
-    .populate("participantes.memberId")
-    .populate("grupoId")
-    return despesaPorGrupo
-  } catch(err) {
-    throw err
+    const despesaPorGrupo = await Despesa.find({ grupoId: id })
+      .populate("pagoPor")
+      .populate("participantes.memberId")
+      .populate("grupoId");
+    return despesaPorGrupo;
+  } catch (err) {
+    throw err;
   }
-}
+};

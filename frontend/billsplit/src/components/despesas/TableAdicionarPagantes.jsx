@@ -1,4 +1,16 @@
+import { useContext, useEffect } from "react";
+import { DespesaContext } from "../../contexts/despesaContext";
+
+
 function TableAdicionarPagantes() {
+    const {state, despesaGrupoSelecionado} = useContext(DespesaContext)
+useEffect(() => {
+  const fetchGrupo = async () => {
+    await despesaGrupoSelecionado(state.grupoSelecionado)
+    console.log('Grupo atualizado:', state.grupo)
+  }
+  if (state.grupoSelecionado) fetchGrupo()
+}, [state.grupoSelecionado])
   return (
     <div>
       <div className="overflow-x-auto">
@@ -12,13 +24,15 @@ function TableAdicionarPagantes() {
             </tr>
           </thead>
           <tbody>
-            {/* row 1 */}
-            <tr>
+           {state.grupo.members?.map((g) => (
+              <tr>
               <th></th>
-              <td>Cy Ganderton</td>
+              <td>{g.name}</td>
               
               <td><input type="checkbox" /></td>
             </tr>
+           ))}
+          
           </tbody>
         </table>
       </div>

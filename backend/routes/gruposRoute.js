@@ -1,4 +1,4 @@
-import { grupoFind, grupoRegister } from "../controllers/gruposController.js";
+import { grupoFind, grupoRegister, grupoSelecionado } from "../controllers/gruposController.js";
 import express from 'express'
 import { authVerify } from "../middlewares/authMid.js";
 
@@ -9,5 +9,8 @@ router.post("/register", authVerify, grupoRegister);
 
 //!Load de grupos do usuário logado
 router.get("/grupos", authVerify, grupoFind)
+
+//!Get de grupo por id
+router.get("/grupo/:id", authVerify, grupoSelecionado)
 
 export default router;

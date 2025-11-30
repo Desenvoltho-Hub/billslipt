@@ -1,4 +1,8 @@
+import { useContext } from "react";
+import { DespesaContext } from "../../contexts/despesaContext";
+
 function CardContas() {
+    
     return (  
         <div className="flex justify-between bg-base-300 p-5 items-center">
             <div>
