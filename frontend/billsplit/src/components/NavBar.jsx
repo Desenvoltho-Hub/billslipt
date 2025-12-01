@@ -35,7 +35,7 @@ function NavBar() {
               </svg>
             </div>
           </div>
-          <h1 className="text-5xl">{state.usuario.name.toUpperCase()}</h1>
+          <h1 className="text-5xl">{state.usuario.name}</h1>
         </div>
        
         <div className="navbar-end">

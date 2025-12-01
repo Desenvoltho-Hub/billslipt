@@ -148,7 +148,7 @@ const participantes = (id) => {
     }));
 
   console.log("Payload:", membrosPayload);
-
+    console.log(membrosPayload)
   try {
     const response = await api.put(`/despesa/adicionar/${id}`, { membros: membrosPayload });
     console.log("Resposta backend:", response.data);
