@@ -146,7 +146,7 @@ export const AuthProvider = ({ children }) => {
         type: "USER_GET",
         usuario: response.data.response
       })
-      console.log(response)
+      
     } catch(err) {
       console.log(err)
     }
