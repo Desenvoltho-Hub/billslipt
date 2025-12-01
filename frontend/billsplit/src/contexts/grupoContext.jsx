@@ -105,8 +105,19 @@ export const GrupoProvider = ({ children }) => {
             })
         }
     }
+    //====================================================================
+    // !<grupoAdd>
+    //====================================================================
+    const grupoAdd = async (id) => {
+      try {
+        const response = await api.put(`/grupo/grupo${id}`)
+        return response
+      } catch (err) {
+        console.log(err)
+      }
+    }
   return (
-    <GrupoContext.Provider value={{ grupoRegister, handleChange, state, grupoFind }}>
+    <GrupoContext.Provider value={{ grupoRegister, handleChange, state, grupoFind, grupoAdd }}>
       {children}
     </GrupoContext.Provider>
   );

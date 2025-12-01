@@ -1,6 +1,6 @@
 import Grupo from "../models/Grupo.js";
 import { grupoCreate } from "../services/grupoRegister.js";
-import { grupoLoad, grupoSelect } from "../services/grupoServices.js";
+import { grupoLoad, grupoMemberAdd, grupoSelect } from "../services/grupoServices.js";
 
 //====================================================================
 // !<grupoRegister>
@@ -55,3 +55,16 @@ export const grupoSelecionado = async(req , res) => {
     res.status(400).json({ message: err.message });
   }
 };
+//====================================================================
+// !<grupoAdd>
+//====================================================================
+export const grupoAdd = async (req, res) => {
+  const id = req.params.id
+  const membro = req.user
+  try {
+    const response = await grupoMemberAdd({id, membro})
+    res.status(200).json({message: 'Membro adicionado com sucesso!', response})
+  } catch(err) {
+    res.status(400).json({message: 'Erro ao adicionar membro', err})
+  }
+}

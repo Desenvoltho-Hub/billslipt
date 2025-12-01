@@ -1,4 +1,5 @@
 import Grupo from "../models/Grupo.js";
+import User from "../models/User.js";
 
 //====================================================================
 // !<grupoLoad>
@@ -26,3 +27,19 @@ export const grupoSelect = async ({ id }) => {
     throw err
   }
 }
+//====================================================================
+// !<grupoMemberAdd>
+//====================================================================
+export const grupoMemberAdd = async ({ id, membro }) => {
+  const membroId = await User.findOne({email})
+  try {
+    const response = await Grupo.findByIdAndUpdate(
+      id, 
+      { $push: { members: membroId.id } },
+      { new: true } 
+    );
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};
