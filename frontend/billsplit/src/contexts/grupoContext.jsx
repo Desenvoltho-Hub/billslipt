@@ -14,31 +14,37 @@ export const GrupoProvider = ({ children }) => {
       }
       case "LIMPAR_INPUT": {
         return {
-            ...state,
-            name: action.name,
-            description: action.description
-        }
+          ...state,
+          name: action.name,
+          description: action.description,
+        };
       }
       case "FAIL": {
         return {
-            ...state,
-            fail: action.fail
-        }
+          ...state,
+          fail: action.fail,
+        };
       }
       case "GRUPOS": {
         return {
-            ...state,
-            grupos: action.grupos
-        }
+          ...state,
+          grupos: action.grupos,
+        };
       }
       case "IS_LOADING": {
         return {
-            ...state,
-            loading: action.loading
-        }
+          ...state,
+          loading: action.loading,
+        };
+      }
+      case "GRUPO_SELECIONADO": {
+        return {
+          ...state,
+          grupoSelecionado: action.grupoSelecionado,
+        };
       }
       default:
-        return state
+        return state;
     }
   };
   const [state, dispatch] = useReducer(reducer, {
@@ -46,7 +52,10 @@ export const GrupoProvider = ({ children }) => {
     description: "",
     fail: false,
     grupos: [],
-    loading: false
+    loading: false,
+    novoMembro: "",
+    grupoSelecionado: "",
+    email: "",
   });
   const handleChange = (e) => {
     dispatch({
@@ -54,70 +63,100 @@ export const GrupoProvider = ({ children }) => {
       name: e.target.name,
       value: e.target.value,
     });
-};
-    //====================================================================
-    // !<grupoRegister>
-    //====================================================================
-    const grupoRegister = async () => {
-      try {
-        await api.post("/grupo/register", {
-          name: state.name,
-          description: state.description,
-        });
-        dispatch({
-            type: "FAIL",
-            fail: false
-        })
-      } catch (err) {
-        console.log(err.message);
-        dispatch({
-            type: "FAIL",
-            fail: true
-        })
-      } finally {
-        dispatch({
-            type: "LIMPAR_INPUT",
-            name: '',
-            description: ''
-        })
-      }
+  };
+  //====================================================================
+  // !<grupoRegister>
+  //====================================================================
+  const grupoRegister = async () => {
+    try {
+      await api.post("/grupo/register", {
+        name: state.name,
+        description: state.description,
+      });
+      dispatch({
+        type: "FAIL",
+        fail: false,
+      });
+    } catch (err) {
+      console.log(err.message);
+      dispatch({
+        type: "FAIL",
+        fail: true,
+      });
+    } finally {
+      dispatch({
+        type: "LIMPAR_INPUT",
+        name: "",
+        description: "",
+      });
     }
-    //====================================================================
-    // !<grupoFind>
-    //====================================================================
-    const grupoFind = async () => {
-        try {
-             dispatch({
-                type: "IS_LOADING",
-                loading: true
-            })
-            const grupos = await api.get("/grupo/grupos")
-            dispatch({
-                type: "GRUPOS",
-                grupos: grupos.data.response
-            })
-        } catch(err) {
-            console.log(err)
-        } finally{
-              dispatch({
-                type: "IS_LOADING",
-                loading: false
-            })
-        }
+  };
+  //====================================================================
+  // !<grupoFind>
+  //====================================================================
+  const grupoFind = async () => {
+    try {
+      dispatch({
+        type: "IS_LOADING",
+        loading: true,
+      });
+      const grupos = await api.get("/grupo/grupos");
+      dispatch({
+        type: "GRUPOS",
+        grupos: grupos.data.response,
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch({
+        type: "IS_LOADING",
+        loading: false,
+      });
     }
-    //====================================================================
-    // !<grupoAdd>
-    //====================================================================
-    const grupoAdd = async (id) => {
-      try {
-        const response = await api.put(`/grupo/grupo${id}`)
-        return response
-      } catch (err) {
-        console.log(err)
-      }
+  };
+  //====================================================================
+  // !<grupoAdd>
+  //====================================================================
+  const grupoAdd = async () => {
+    const id = state.grupoSelecionado;
+    console.log(id)
+    try {
+      const response = await api.put(`/grupo/grupoadd/${id}`, {
+        email: state.email,
+      });
+      alert("Membro adicionado com sucesso!");
+      return response;
+    } catch (err) {
+      alert('Erro ao adicionar membro')
+      console.log(err);
+    } finally {
+      dispatch({
+        type: "LIMPAR_INPUT",
+        name: "",
+        description: "",
+      });
     }
+  };
+  //====================================================================
+  // !<grupoSelecionado>
+  //====================================================================
+  const grupoSelecionado = (id) => {
+    dispatch({
+      type: "GRUPO_SELECIONADO",
+      grupoSelecionado: id,
+    });
+  };
   return (
-    <GrupoContext.Provider value={{ grupoRegister, handleChange, state, grupoFind, grupoAdd }}>
+    <GrupoContext.Provider
+      value={{
+        grupoRegister,
+        handleChange,
+        state,
+        grupoFind,
+        grupoAdd,
+        grupoSelecionado,
+      }}
+    >
       {children}
     </GrupoContext.Provider>
   );
