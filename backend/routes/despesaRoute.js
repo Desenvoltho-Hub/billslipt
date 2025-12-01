@@ -4,6 +4,7 @@ import {
   despesaGet,
   despesaGrupo,
   despesaPut,
+  despesas,
   despesaSend,
 } from "../controllers/despesaController.js";
 
@@ -18,6 +19,6 @@ router.put("/adicionar/:id", authVerify, despesaPut);
 //!Despesas por grupo
 router.get("/grupo/:id", authVerify, despesaGrupo);
 //!Despesas totais usuário
-router.get("/despesas/:id", authVerify)
+router.get("/despesas", authVerify, despesas)
 
 export default router;

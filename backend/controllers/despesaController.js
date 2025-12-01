@@ -4,6 +4,7 @@ import {
   despesaGroup,
   despesaInvite,
   despesaPopulate,
+  despesaTotal,
 } from "../services/despesaServices.js";
 import mongoose from "mongoose";
 
@@ -99,3 +100,15 @@ export const despesaGrupo = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+//====================================================================
+// !<despesas>
+//====================================================================
+export const despesas = async (req, res) => {
+  const id = req.user.id
+  try {
+    const response = await despesaTotal({id})
+    res.status(200).json({response})
+  } catch (err) {
+    res.status(400).json({err})
+  }
+}
