@@ -3,7 +3,7 @@ import { GrupoContext } from "../../contexts/grupoContext";
 import ModalConvidarMembro from "./ModalConvidarMembro";
 
 function TableGrupos() {
-  const { state, grupoAdd } = useContext(GrupoContext);
+  const { state, grupoSelecionado } = useContext(GrupoContext);
   return (
     <div>
       <div className="overflow-x-auto bg-base-300">
@@ -27,7 +27,7 @@ function TableGrupos() {
                 <td><ModalConvidarMembro 
                 click={() => {
                  document.getElementById("my_modal_6").showModal()
-                  grupoAdd(g._id)
+                  grupoSelecionado(g._id)
                 }}
                 /></td>
               </tr>

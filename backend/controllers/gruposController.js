@@ -60,7 +60,8 @@ export const grupoSelecionado = async(req , res) => {
 //====================================================================
 export const grupoAdd = async (req, res) => {
   const id = req.params.id
-  const membro = req.user
+  const membro = req.body.email
+  console.log(id, membro)
   try {
     const response = await grupoMemberAdd({id, membro})
     res.status(200).json({message: 'Membro adicionado com sucesso!', response})

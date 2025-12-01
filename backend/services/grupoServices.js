@@ -31,7 +31,9 @@ export const grupoSelect = async ({ id }) => {
 // !<grupoMemberAdd>
 //====================================================================
 export const grupoMemberAdd = async ({ id, membro }) => {
-  const membroId = await User.findOne({email})
+  console.log('SERVICE AQUI', id, membro)
+  const membroId = await User.findOne({membro})
+  console.log(membroId)
   try {
     const response = await Grupo.findByIdAndUpdate(
       id, 
