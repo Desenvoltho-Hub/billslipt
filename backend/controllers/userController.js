@@ -1,6 +1,7 @@
 import { login } from "../services/auth.js";
 import { register } from "../services/register.js";
 import cookieParser from "cookie-parser";
+import { userGet } from "../services/userServices.js";
 
 //====================================================================
 // !<userRegister>
@@ -47,3 +48,19 @@ export const userLogin = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+//====================================================================
+// !<userWho>
+//====================================================================
+
+export const userWho = async (req, res) => {
+  const id = req.user.id;
+
+  try {
+    const response = await userGet(id);
+  
+    if (!response) return res.status(404).json({ message: "Usuário não encontrado" });
+    res.status(200).json({ message: "Usuário encontrado com sucesso!", response });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+}

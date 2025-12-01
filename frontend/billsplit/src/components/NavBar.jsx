@@ -1,6 +1,14 @@
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/authContext";
+
 
 function NavBar() {
+  const {state, userGet} = useContext(AuthContext)
+
+  useEffect(() => {
+    userGet()
+  }, [])
   return (
     <div className="flex bg-base-300">
       <div className="w-20 m-7 hover-3d">
@@ -27,7 +35,7 @@ function NavBar() {
               </svg>
             </div>
           </div>
-          <a className="btn btn-ghost text-xl">DASHBOARD</a>
+          <h1 className="text-5xl">{state.usuario.name.toUpperCase()}</h1>
         </div>
        
         <div className="navbar-end">

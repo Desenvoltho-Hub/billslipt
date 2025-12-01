@@ -43,6 +43,12 @@ export const AuthProvider = ({ children }) => {
           errorMessage: action.errorMessage,
         };
       }
+      case "USER_GET": {
+        return {
+          ...state,
+          usuario: action.usuario
+        }
+      }
     }
   };
   const [state, dispatch] = useReducer(reducer, {
@@ -53,6 +59,7 @@ export const AuthProvider = ({ children }) => {
     fail: false,
     failLogin: false,
     errorMessage: "",
+    usuario: ''
   });
   const handleChange = (e) => {
     dispatch({
@@ -128,9 +135,25 @@ export const AuthProvider = ({ children }) => {
       });
     }
   };
+  //====================================================================
+  // !<userGet>
+  //====================================================================
+  const userGet = async () => {
+    try {
+
+      const response = await api.get('user/usuario')
+      dispatch({
+        type: "USER_GET",
+        usuario: response.data.response
+      })
+      console.log(response)
+    } catch(err) {
+      console.log(err)
+    }
+  }
   return (
     <AuthContext.Provider
-      value={{ handleChange, userRegister, userLogin, state }}
+      value={{ handleChange, userRegister, userLogin, state, userGet }}
     >
       {children}
     </AuthContext.Provider>

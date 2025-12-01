@@ -1,5 +1,5 @@
 import express from "express";
-import { userLogin, userRegister } from "../controllers/userAuthController.js";
+import { userLogin, userRegister, userWho } from "../controllers/userController.js";
 import { authVerify } from "../middlewares/authMid.js";
 
 const router = express.Router();
@@ -9,6 +9,7 @@ router.post("/register", userRegister);
 
 //!Login do usuário
 router.post("/login", userLogin);
-
+//!Usuário get
+router.get("/usuario", authVerify, userWho )
 
 export default router;

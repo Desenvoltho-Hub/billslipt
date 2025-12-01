@@ -14,7 +14,6 @@ function Dashboard() {
            totalGrupos={state.grupos.length}
            />
            <div className="text-5xl p-5">
-            Contas
            </div>
            <div>
             <TableContas />
